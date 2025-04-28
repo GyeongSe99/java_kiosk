@@ -1,6 +1,6 @@
 package kiosk_lv4;
 
-import kiosk.MenuItem;
+import kiosk_lv4.MenuItem;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -8,60 +8,70 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Kiosk {
-    private final List<MenuItem> menuItems;
+    private final List<Menu> menus;
+    private Scanner sc = new Scanner(System.in);
 
     public Kiosk() {
-        this.menuItems = new ArrayList<>();
-        MenuItem menuItem1 = new MenuItem("ShackBurger", 6900, "토마토, 양상추, 쉑소스가 토핑된 치즈버거");
-        MenuItem menuItem2 = new MenuItem("SmokeShack", 8900, "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거");
-        MenuItem menuItem3 = new MenuItem("Cheeseburger", 6900, "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거");
-        MenuItem menuItem4 = new MenuItem("Hamburger", 5400, "비프패티를 기반으로 야채가 들어간 기본버거");
-        this.menuItems.add(menuItem1);
-        this.menuItems.add(menuItem2);
-        this.menuItems.add(menuItem3);
-        this.menuItems.add(menuItem4);
+        this.menus = new ArrayList<>();
+    }
+
+    public Kiosk(List<Menu> menus) {
+        this.menus = menus;
     }
 
     public void start() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("[ SHAKESHACK MENU ]");
-        System.out.println();
-        for (int i = 0; i < menuItems.size(); i++) {
-            MenuItem item = menuItems.get(i);
-            System.out.printf("%d. %-13s | W %.1f | %s\n", i + 1, item.getName(), (double) item.getPrice() / 1000, item.getDescription());
-        }
-        System.out.println("0. 종료");
-        System.out.println();
 
         while (true) {
-            System.out.print("원하시는 메뉴를 선택해주세요 : ");
+            printMenus();
+            int menuChoice = readIntInRange(0, this.menus.size());
+            if (menuChoice == 0) {
+                System.out.println("프로그램을 종료합니다.");
+                sc.close();
+                System.exit(0);
+            }
+            handleMenuItem(menus.get(menuChoice - 1));
+        }
+    }
 
+    private void printMenus() {
+        System.out.println("[ MAIN MENU ]");
+        for (int i = 0; i < this.menus.size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, this.menus.get(i).getCategory());
+        }
+        System.out.println("0. 종료");
+    }
+
+    private void handleMenuItem(Menu menu) {
+        menu.printMenuItems();
+        List<MenuItem> menuItems = menu.getMenuItems();
+        int choiceMenuItem = readIntInRange(0, menuItems.size());
+        if (choiceMenuItem == 0) {
+            return;
+        }
+        MenuItem menuItem = menuItems.get(choiceMenuItem - 1);
+        System.out.printf("선택한 메뉴: %-16s | W %.1f | %s%n", menuItem.getName(), (double) menuItem.getPrice() / 1000, menuItem.getDescription());
+        System.out.println();
+    }
+
+    private int readIntInRange(int min, int max) {
+        int input;
+        while (true) {
             try {
-                int choice = sc.nextInt();
-
-                if (choice < 0 || choice >= menuItems.size()) {
-                    throw new IllegalArgumentException();
+                input = sc.nextInt();
+                if (input < min || input > max) {
+                    System.out.println("범위를 벗어났습니다. 다시 시도해주세요.");
+                    continue;
                 }
-
-                if (choice == 0) {
-                    System.out.println("프로그램을 종료합니다.");
-                    sc.close();
-                    System.exit(0);
-                } else {
-                    MenuItem item = menuItems.get(choice - 1);
-                    System.out.printf("> %d. %-13s | W %.1f | %s\n", choice, item.getName(), (double) item.getPrice() / 1000, item.getDescription());
-                }
+                return input;
             } catch (InputMismatchException e) {
                 System.out.println("정수만 입력해주세요.");
                 sc.nextLine();
-            } catch (IllegalArgumentException e) {
-                System.out.println("0에서 4 사이의 번호만 선택 가능합니다.");
             } catch (Exception e) {
-                System.out.println("알 수 없는 오류");
-                e.printStackTrace();
+                System.out.println("시스템 오류가 발생했습니다.");
+                sc.nextLine();
             }
-
         }
     }
+
+
 }
