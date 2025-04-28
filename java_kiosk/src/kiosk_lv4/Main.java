@@ -1,7 +1,5 @@
 package kiosk_lv4;
 
-import kiosk_lv4.Kiosk;
-
 import java.util.ArrayList;
 import java.util.List;
 
