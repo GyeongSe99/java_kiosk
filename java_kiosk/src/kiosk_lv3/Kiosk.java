@@ -39,21 +39,18 @@ public class Kiosk {
 
             try {
                 int choice = sc.nextInt();
-                switch (choice) {
-                    case 0:
-                        System.out.println("프로그램을 종료합니다.");
-                        sc.close();
-                        System.exit(0);
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                        MenuItem item = menuItems.get(choice - 1);
-                        System.out.printf("> %d. %-13s | W %.1f | %s\n", choice, item.getName(), (double) item.getPrice() / 1000, item.getDescription());
-                        break;
-                    default:
-                        System.out.println("잘못된 값 입력");
-                        throw new IllegalArgumentException();
+
+                if (choice < 0 || choice >= menuItems.size()) {
+                    throw new IllegalArgumentException();
+                }
+
+                if (choice == 0) {
+                    System.out.println("프로그램을 종료합니다.");
+                    sc.close();
+                    System.exit(0);
+                } else {
+                    MenuItem item = menuItems.get(choice - 1);
+                    System.out.printf("> %d. %-13s | W %.1f | %s\n", choice, item.getName(), (double) item.getPrice() / 1000, item.getDescription());
                 }
             } catch (InputMismatchException e) {
                 System.out.println("정수만 입력해주세요.");
