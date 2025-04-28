@@ -3,6 +3,7 @@ package kiosk_lv3;
 import kiosk.MenuItem;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,23 +37,34 @@ public class Kiosk {
         while (true) {
             System.out.print("원하시는 메뉴를 선택해주세요 : ");
 
-            int choice = sc.nextInt();
-            switch (choice) {
-                case 0:
-                    System.out.println("프로그램을 종료합니다.");
-                    sc.close();
-                    System.exit(0);
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                    MenuItem item = menuItems.get(choice - 1);
-                    System.out.printf("> %d. %-13s | W %.1f | %s\n", choice, item.getName(), (double) item.getPrice() / 1000, item.getDescription());
-                    break;
-                default:
-                    System.out.println("잘못된 값 입력");
-                    break;
+            try {
+                int choice = sc.nextInt();
+                switch (choice) {
+                    case 0:
+                        System.out.println("프로그램을 종료합니다.");
+                        sc.close();
+                        System.exit(0);
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        MenuItem item = menuItems.get(choice - 1);
+                        System.out.printf("> %d. %-13s | W %.1f | %s\n", choice, item.getName(), (double) item.getPrice() / 1000, item.getDescription());
+                        break;
+                    default:
+                        System.out.println("잘못된 값 입력");
+                        throw new IllegalArgumentException();
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("정수만 입력해주세요.");
+                sc.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println("0에서 4 사이의 번호만 선택 가능합니다.");
+            } catch (Exception e) {
+                System.out.println("알 수 없는 오류");
+                e.printStackTrace();
             }
+
         }
     }
 }
