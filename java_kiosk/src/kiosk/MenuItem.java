@@ -2,10 +2,10 @@ package kiosk;
 
 public class MenuItem {
     private String name;
-    private String price;
+    private int price;
     private String description;
 
-    public MenuItem(String name, String price, String description) {
+    public MenuItem(String name, int price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -19,11 +19,11 @@ public class MenuItem {
         this.name = name;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return this.price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
