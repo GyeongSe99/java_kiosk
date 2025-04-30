@@ -1,7 +1,5 @@
 package kiosk;
 
-import java.util.Map;
-
 public class OrderService {
     private final Cart cart;
 
