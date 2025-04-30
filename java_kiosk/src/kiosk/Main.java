@@ -5,8 +5,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<Menu> menuList = new ArrayList<>();
-        Kiosk kiosk = new Kiosk(menuList);
+        List<Menu> menuList = createMenus();
+        Cart cart = new Cart();
+        InputReader inputReader = new InputReader();
+        OrderService orderService = new OrderService();
+        Kiosk kiosk = new Kiosk(menuList, cart, inputReader, orderService);
         kiosk.start();
     }
 

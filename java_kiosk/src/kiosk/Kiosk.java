@@ -13,12 +13,13 @@ public class Kiosk {
     private final List<Menu> menus;
     private final InputReader inputReader;
     private final Cart cart;
+    private final OrderService orderService;
 
-
-    public Kiosk(List<Menu> menus) {
+    public Kiosk(List<Menu> menus, Cart cart, InputReader inputReader, OrderService orderService) {
         this.menus = menus;
-        this.cart = new Cart();
-        this.inputReader = new InputReader();
+        this.cart = cart;
+        this.inputReader = inputReader;
+        this.orderService = orderService;
     }
 
     /**
