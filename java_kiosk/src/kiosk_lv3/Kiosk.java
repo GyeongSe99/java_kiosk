@@ -1,6 +1,6 @@
 package kiosk_lv3;
 
-import kiosk.MenuItem;
+import kiosk_lv1.MenuItem;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Kiosk {
-    private final List<kiosk.MenuItem> menuItems;
+    private final List<kiosk_lv1.MenuItem> menuItems;
 
     public Kiosk() {
         this.menuItems = new ArrayList<>();
-        kiosk.MenuItem menuItem1 = new kiosk.MenuItem("ShackBurger", 6900, "토마토, 양상추, 쉑소스가 토핑된 치즈버거");
-        kiosk.MenuItem menuItem2 = new kiosk.MenuItem("SmokeShack", 8900, "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거");
-        kiosk.MenuItem menuItem3 = new kiosk.MenuItem("Cheeseburger", 6900, "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거");
-        kiosk.MenuItem menuItem4 = new kiosk.MenuItem("Hamburger", 5400, "비프패티를 기반으로 야채가 들어간 기본버거");
+        kiosk_lv1.MenuItem menuItem1 = new kiosk_lv1.MenuItem("ShackBurger", 6900, "토마토, 양상추, 쉑소스가 토핑된 치즈버거");
+        kiosk_lv1.MenuItem menuItem2 = new kiosk_lv1.MenuItem("SmokeShack", 8900, "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거");
+        kiosk_lv1.MenuItem menuItem3 = new kiosk_lv1.MenuItem("Cheeseburger", 6900, "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거");
+        kiosk_lv1.MenuItem menuItem4 = new kiosk_lv1.MenuItem("Hamburger", 5400, "비프패티를 기반으로 야채가 들어간 기본버거");
         this.menuItems.add(menuItem1);
         this.menuItems.add(menuItem2);
         this.menuItems.add(menuItem3);
@@ -28,7 +28,7 @@ public class Kiosk {
         System.out.println("[ SHAKESHACK MENU ]");
         System.out.println();
         for (int i = 0; i < menuItems.size(); i++) {
-            kiosk.MenuItem item = menuItems.get(i);
+            kiosk_lv1.MenuItem item = menuItems.get(i);
             System.out.printf("%d. %-13s | W %.1f | %s\n", i + 1, item.getName(), (double) item.getPrice() / 1000, item.getDescription());
         }
         System.out.println("0. 종료");
