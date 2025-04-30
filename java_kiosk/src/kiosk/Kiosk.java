@@ -91,8 +91,7 @@ public class Kiosk {
 
     private void showDiscountSelection() {
         System.out.println("할인 정보를 입력해주세요.");
-        Stream.of(UserType.values())
-                .forEach(type -> System.out.printf("%d. %s : %d%%%n", type.ordinal() + 1, type.getLabel(), type.getRate()));
+        UserType.showUserTypeMenu();
     }
 
     private void showMainMenus() {
