@@ -8,7 +8,7 @@ public class Main {
         List<Menu> menuList = createMenus();
         Cart cart = new Cart();
         InputReader inputReader = new InputReader();
-        OrderService orderService = new OrderService();
+        OrderService orderService = new OrderService(cart);
         Kiosk kiosk = new Kiosk(menuList, cart, inputReader, orderService);
         kiosk.start();
     }
