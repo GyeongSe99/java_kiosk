@@ -2,7 +2,6 @@ package kiosk;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * 메뉴 출력, 입력 받기, 분기 처리(선택한 값에 따른 처리)
@@ -91,8 +90,7 @@ public class Kiosk {
 
     private void showDiscountSelection() {
         System.out.println("할인 정보를 입력해주세요.");
-        Stream.of(UserType.values())
-                .forEach(type -> System.out.printf("%d. %s : %d%%%n", type.ordinal() + 1, type.getLabel(), type.getRate()));
+        UserType.showUserTypeList();
     }
 
     private void showMainMenus() {

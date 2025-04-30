@@ -1,5 +1,7 @@
 package kiosk;
 
+import java.util.stream.Stream;
+
 public enum UserType {
     NATIONAL_HONOREE("국가유공자", 10),
     SOLDIER("군인", 5),
@@ -20,5 +22,10 @@ public enum UserType {
 
     public int getRate() {
         return rate;
+    }
+
+    public static void showUserTypeList() {
+        Stream.of(UserType.values())
+                .forEach(type -> System.out.printf("%d. %s : %d%%%n", type.ordinal() + 1, type.getLabel(), type.getRate()));
     }
 }
