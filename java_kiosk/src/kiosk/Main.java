@@ -5,6 +5,14 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        List<Menu> menuList = new ArrayList<>();
+        Kiosk kiosk = new Kiosk(menuList);
+        kiosk.start();
+    }
+
+    private static List<Menu> createMenus() {
+        List<Menu> menuList = new ArrayList<>();
+
         Menu burgers = new Menu("Burgers");
         Menu drinks = new Menu("drinks");
         Menu desserts = new Menu("desserts");
@@ -25,12 +33,10 @@ public class Main {
         desserts.addMenuItem("Strawberry Shake", 4000, "신선한 딸기 과육이 들어간 밀크쉐이크");
         desserts.addMenuItem("Brownie", 2800, "촉촉한 초코 브라우니로 진한 초콜릿 맛");
 
-        List<Menu> menuList = new ArrayList<>();
         menuList.add(burgers);
         menuList.add(drinks);
         menuList.add(desserts);
 
-        Kiosk kiosk = new Kiosk(menuList);
-        kiosk.start();
+        return menuList;
     }
 }
