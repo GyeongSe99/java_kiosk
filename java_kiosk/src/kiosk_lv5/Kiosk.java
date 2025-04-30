@@ -21,7 +21,7 @@ public class Kiosk {
     public void start() {
 
         while (true) {
-            printMenus();
+            showMenus();
             int menuChoice = readIntInRange(0, this.menus.size());
             if (menuChoice == 0) {
                 System.out.println("프로그램을 종료합니다.");
@@ -32,7 +32,7 @@ public class Kiosk {
         }
     }
 
-    private void printMenus() {
+    private void showMenus() {
         System.out.println("[ MAIN MENU ]");
         for (int i = 0; i < this.menus.size(); i++) {
             System.out.printf("%d. %s%n", i + 1, this.menus.get(i).getCategory());
@@ -41,7 +41,7 @@ public class Kiosk {
     }
 
     private void handleMenuItem(Menu menu) {
-        menu.printMenuItems();
+        menu.showMenuItems();
         List<MenuItem> menuItems = menu.getMenuItems();
         int choiceMenuItem = readIntInRange(0, menuItems.size());
         if (choiceMenuItem == 0) {
