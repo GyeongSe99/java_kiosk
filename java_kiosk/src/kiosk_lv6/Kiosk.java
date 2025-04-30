@@ -78,7 +78,14 @@ public class Kiosk {
 
         int selectedNum = readIntInRange(1, 2);
         if (selectedNum == 1) {
-            System.out.printf("주문이 완료되었습니다. 금액은 W %.1f 입니다.%n", (double) totalPrice / 1000);
+            System.out.println("할인 정보를 입력해주세요.");
+            for (UserType type : UserType.values()) {
+                System.out.printf("%d. %s : %d%%\n", type.ordinal() + 1, type.getLabel(), type.getRate());
+            }
+            int selectedNumForUserType = readIntInRange(1, UserType.values().length);
+            UserType userType = UserType.values()[selectedNumForUserType - 1];
+            double discounted = totalPrice * (1 - userType.getRate() / 100.0);
+            System.out.printf("주문이 완료되었습니다. 금액은 W %.1f 입니다.%n", (double) discounted / 1000);
             cart.resetCartItems();
         }
     }
