@@ -5,6 +5,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+메뉴 출력 및 주문 흐름
+ */
 public class Kiosk {
     private final List<Menu> menus;
     private Scanner sc = new Scanner(System.in);
