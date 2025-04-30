@@ -1,6 +1,5 @@
 package kiosk_lv5;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -11,10 +10,12 @@ import java.util.Scanner;
 public class Kiosk {
     private final List<Menu> menus;
     private Scanner sc = new Scanner(System.in);
+    private Cart cart;
 
 
     public Kiosk(List<Menu> menus) {
         this.menus = menus;
+        this.cart = new Cart();
     }
 
     public void start() {
@@ -48,6 +49,8 @@ public class Kiosk {
         }
         MenuItem menuItem = menuItems.get(choiceMenuItem - 1);
         System.out.printf("선택한 메뉴: %-16s | W %.1f | %s%n", menuItem.getName(), (double) menuItem.getPrice() / 1000, menuItem.getDescription());
+
+        handleAddToCart(menuItem);
         System.out.println();
     }
 
@@ -71,5 +74,17 @@ public class Kiosk {
         }
     }
 
+    private void showAddToCart() {
+        System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+        System.out.println("1. 확인        2. 취소");
+    }
 
+    private void handleAddToCart(MenuItem menuItem) {
+        showAddToCart();
+        int selectedNum = readIntInRange(1, 2);
+        if (selectedNum == 1) {
+            cart.addToCart(menuItem);
+            System.out.printf("%s이 장바구니에 추가되었습니다. %n", menuItem.getName());
+        }
+    }
 }
