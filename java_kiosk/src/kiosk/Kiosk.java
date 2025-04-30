@@ -73,23 +73,27 @@ public class Kiosk {
      * 장바구니 내역 및 총 금액 확인 후 최종 주문
      */
     private void handleOrder() {
-        System.out.println("아래와 같이 주문 하시겠습니까?");
-        System.out.println();
-        cart.showCartItems();
-        int totalPrice = cart.showTotalPrice();
-        System.out.println("1. 주문        2. 메뉴판");
+        showCartInfo();
 
         int selectedNum = inputReader.readIntInRange(1, 2);
         if (selectedNum == 1) {
-            System.out.println("할인 정보를 입력해주세요.");
-            Stream.of(UserType.values())
-                    .forEach(type -> System.out.printf("%d. %s : %d%%%n", type.ordinal()+1, type.getLabel(), type.getRate()));
+            showDiscountSelection();
             int selectedNumForUserType = inputReader.readIntInRange(1, UserType.values().length);
-            UserType userType = UserType.values()[selectedNumForUserType - 1];
-            double discounted = totalPrice * (1 - userType.getRate() / 100.0);
-            System.out.printf("주문이 완료되었습니다. 금액은 W %.1f 입니다.%n", (double) discounted / 1000);
-            cart.resetCartItems();
+            orderService.order(selectedNumForUserType);
         }
+    }
+
+    private void showCartInfo() {
+        System.out.println("아래와 같이 주문 하시겠습니까?");
+        System.out.println();
+        cart.showCartItems();
+        System.out.println("1. 주문        2. 메뉴판");
+    }
+
+    private void showDiscountSelection() {
+        System.out.println("할인 정보를 입력해주세요.");
+        Stream.of(UserType.values())
+                .forEach(type -> System.out.printf("%d. %s : %d%%%n", type.ordinal()+1, type.getLabel(), type.getRate()));
     }
 
     private void showMainMenus() {
@@ -112,7 +116,6 @@ public class Kiosk {
         }
         MenuItem menuItem = menuItems.get(choiceMenuItem - 1);
         System.out.printf("선택한 메뉴: %-16s | W %.1f | %s%n", menuItem.getName(), (double) menuItem.getPrice() / 1000, menuItem.getDescription());
-
         handleAddToCart(menuItem);
         System.out.println();
     }
