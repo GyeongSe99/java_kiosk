@@ -36,7 +36,7 @@ public class Menu {
         this.menuItems.addAll(menuItems);
     }
 
-    public void printMenuItems() {
+    public void showMenuItems() {
         System.out.printf("[ %s MENU ]%n", category);
         for (int i = 0; i < menuItems.size(); i++) {
             MenuItem item = menuItems.get(i);
