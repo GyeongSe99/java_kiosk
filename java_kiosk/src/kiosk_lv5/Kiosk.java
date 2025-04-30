@@ -12,9 +12,6 @@ public class Kiosk {
     private final List<Menu> menus;
     private Scanner sc = new Scanner(System.in);
 
-    public Kiosk() {
-        this.menus = new ArrayList<>();
-    }
 
     public Kiosk(List<Menu> menus) {
         this.menus = menus;
