@@ -1,8 +1,6 @@
 package kiosk;
 
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -46,8 +44,9 @@ public class Kiosk {
     /**
      * 선택지에 따른 프로세스 분기 처리
      * (0: 종료, 1~N: 메뉴 카테고리, N+1~N+2: 주문/취소)
+     *
      * @param menuChoice 사용자가 선택한 값
-     * @param canOrder 주문가능여부 (장바구니에 담은 물건이 있는지 없는지에 대한 여부)
+     * @param canOrder   주문가능여부 (장바구니에 담은 물건이 있는지 없는지에 대한 여부)
      */
     private void processChoice(int menuChoice, boolean canOrder) {
         if (menuChoice == 0) {
@@ -93,7 +92,7 @@ public class Kiosk {
     private void showDiscountSelection() {
         System.out.println("할인 정보를 입력해주세요.");
         Stream.of(UserType.values())
-                .forEach(type -> System.out.printf("%d. %s : %d%%%n", type.ordinal()+1, type.getLabel(), type.getRate()));
+                .forEach(type -> System.out.printf("%d. %s : %d%%%n", type.ordinal() + 1, type.getLabel(), type.getRate()));
     }
 
     private void showMainMenus() {
@@ -105,6 +104,7 @@ public class Kiosk {
 
     /**
      * 메뉴 카테고리 선택 후, 메뉴 선택 및 선택한 메뉴 장바구니 담기
+     *
      * @param menu
      */
     private void handleMenuItem(Menu menu) {
@@ -119,7 +119,6 @@ public class Kiosk {
         handleAddToCart(menuItem);
         System.out.println();
     }
-
 
 
     /**

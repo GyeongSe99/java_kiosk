@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputReader {
-    private Scanner sc;
+    private final Scanner sc;
 
     public InputReader() {
         this.sc = new Scanner(System.in);

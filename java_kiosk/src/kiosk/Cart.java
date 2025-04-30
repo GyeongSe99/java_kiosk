@@ -6,12 +6,12 @@ import java.util.Map;
 public class Cart {
     private Map<String, CartItem> cartItems;
 
-    public Map<String, CartItem> getCartItems() {
-        return cartItems;
-    }
-
     public Cart() {
         this.cartItems = new HashMap<>();
+    }
+
+    public Map<String, CartItem> getCartItems() {
+        return cartItems;
     }
 
     public void resetCartItems() {
