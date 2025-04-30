@@ -2,7 +2,6 @@ package kiosk;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * 메뉴 출력, 입력 받기, 분기 처리(선택한 값에 따른 처리)
