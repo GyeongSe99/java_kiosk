@@ -32,10 +32,12 @@ public class Cart {
 
     public void showCartItems() {
         System.out.println("[ Orders ]");
-        for (Map.Entry<String, CartItem> entry : this.cartItems.entrySet()) {
-            CartItem cartItem = entry.getValue();
-            System.out.printf("%-14s | W %.1f | %d 개 %n", entry.getKey(), (double) cartItem.getItem().getPrice() / 1000, cartItem.getQuantity());
-        }
+        this.cartItems.forEach((key, cartItem) -> System.out.printf(
+                "%-14s | W %.1f | %d 개 %n",
+                key,
+                cartItem.getItem().getPrice() / 1000.0,
+                cartItem.getQuantity()
+        ));
         System.out.println();
     }
 
@@ -47,12 +49,9 @@ public class Cart {
     }
 
     private int getTotalPrice() {
-        int totalPrice = 0;
-        for (Map.Entry<String, CartItem> entry : this.cartItems.entrySet()) {
-            CartItem cartItem = entry.getValue();
-            totalPrice += cartItem.getItem().getPrice() * cartItem.getQuantity();
-        }
-        return totalPrice;
+        return this.cartItems.values().stream()
+                .mapToInt(cartItem -> cartItem.getItem().getPrice() * cartItem.getQuantity())
+                .sum();
     }
 }
 

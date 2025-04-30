@@ -2,6 +2,7 @@ package kiosk_lv6;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Menu {
     private final List<MenuItem> menuItems;
@@ -38,10 +39,15 @@ public class Menu {
 
     public void showMenuItems() {
         System.out.printf("[ %s MENU ]%n", category);
-        for (int i = 0; i < menuItems.size(); i++) {
-            MenuItem item = menuItems.get(i);
-            System.out.printf("%d. %-16s | W %.1f | %s\n", i + 1, item.getName(), (double) item.getPrice() / 1000, item.getDescription());
-        }
+        IntStream.range(0, menuItems.size())
+                .forEach(i -> {
+                    MenuItem item = menuItems.get(i);
+                    System.out.printf("%d. %-16s | W %.1f | %s%n",
+                            i + 1,
+                            item.getName(),
+                            item.getPrice() / 1000.0,
+                            item.getDescription());
+                });
         System.out.println("0. 뒤로가기");
     }
 }

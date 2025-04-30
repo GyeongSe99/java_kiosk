@@ -3,6 +3,8 @@ package kiosk_lv6;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * 메뉴 출력, 입력 받기, 분기 처리(선택한 값에 따른 처리)
@@ -79,9 +81,8 @@ public class Kiosk {
         int selectedNum = readIntInRange(1, 2);
         if (selectedNum == 1) {
             System.out.println("할인 정보를 입력해주세요.");
-            for (UserType type : UserType.values()) {
-                System.out.printf("%d. %s : %d%%\n", type.ordinal() + 1, type.getLabel(), type.getRate());
-            }
+            Stream.of(UserType.values())
+                    .forEach(type -> System.out.printf("%d. %s : %d%%%n", type.ordinal()+1, type.getLabel(), type.getRate()));
             int selectedNumForUserType = readIntInRange(1, UserType.values().length);
             UserType userType = UserType.values()[selectedNumForUserType - 1];
             double discounted = totalPrice * (1 - userType.getRate() / 100.0);
@@ -92,9 +93,8 @@ public class Kiosk {
 
     private void showMainMenus() {
         System.out.println("[ MAIN MENU ]");
-        for (int i = 0; i < this.menus.size(); i++) {
-            System.out.printf("%d. %s%n", i + 1, this.menus.get(i).getCategory());
-        }
+        IntStream.range(0, menus.size())
+                .forEach(i -> System.out.printf("%d. %s%n", i + 1, menus.get(i).getCategory()));
         System.out.println("0. 종료");
     }
 
